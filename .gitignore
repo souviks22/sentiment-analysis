@@ -1,2 +1,5 @@
-/data.csv
+# Training data
+/data/tweets.csv
+
+# Jupyter Notebook checkpoints
 /.ipynb_checkpoints
