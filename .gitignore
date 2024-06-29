@@ -1,5 +1,8 @@
 # Training data
 /data/tweets.csv
 
+# Trained Model
+/lstm_model.h5
+
 # Jupyter Notebook checkpoints
 /.ipynb_checkpoints
