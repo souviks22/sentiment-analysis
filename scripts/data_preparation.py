@@ -20,7 +20,7 @@ def prepare_data(input_path):
   
   sequences = keras_tokenizer.texts_to_sequences(texts)
   padded_sequences = pad_sequences(sequences,maxlen=100,padding='post',truncating='post')
-  labels = [row['target'] for row in filtered_data.select('target').collect()]
+  labels = [row['target'] // 2 for row in filtered_data.select('target').collect()]
   
   return padded_sequences, labels, keras_tokenizer
 
