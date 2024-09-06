@@ -16,5 +16,5 @@ def train_model(X_train,y_train):
   model = build_model(vocab_size=10000,input_length=100)
   X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=0.1)
   model.fit(X_train,y_train,validation_data=(X_val,y_val),epochs=10)
-  model.save('lstm_model')
+  model.save('lstm_model.keras')
   return model

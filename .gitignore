@@ -2,7 +2,7 @@
 /data
 
 # Trained Model
-/lstm_model.h5
+/lstm_model*
 
 # Jupyter Notebook checkpoints
 /.ipynb_checkpoints
