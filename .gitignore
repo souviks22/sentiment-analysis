@@ -1,14 +1,12 @@
-# Training data
+# Dataset
 /data
 
 # Trained Model
 /lstm_model*
+/embedding_model*
 
 # Jupyter Notebook checkpoints
 /.ipynb_checkpoints
 
 # Cache
 /scripts/__pycache__
-
-# model
-/lstm_model
