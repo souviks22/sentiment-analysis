@@ -3,7 +3,7 @@
 
 # Trained Model
 /lstm_model*
-/embedding_model*
+/word_embedding.model
 
 # Jupyter Notebook checkpoints
 /.ipynb_checkpoints
