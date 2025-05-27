@@ -1,4 +1,7 @@
 numpy
 pandas
-scikit-learn
+seaborn
+nltk
+gensim
 tensorflow
+scikit-learn
