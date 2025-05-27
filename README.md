@@ -1,11 +1,92 @@
 # Twitter Sentiment Analysis
-## Description
-The project aims to create a efficient text recognition model developed using Natural Language Processing (NLP) priniciples that classifies a certain piece of text as positive or negative on basis of the sentiment experssed by the sentence. I used LSTM for text processing supported by Tensorflow.
-## Training Dataset
-The NLP model is trained on a large [Twitter dataset](https://www.kaggle.com/datasets/kazanova/sentiment140) available on Kaggle consisting of 1.6m training examples which makes it experienced enough to further make wise decisions.
-## Training Environment
-The source code is written in a way such that we can perform the training as a Spark job over a distributed environment. Otherwise, the resources on a local machine is used for training. PySpark API is used to integrate this feature.
-## Testing Results
-Currently the whole dataset is not used to train the model as you can see in `analysis.ipynb` because of limited resources. The accuracy is about ~0.8 which can be further improved.
-## Future Enhancements
-I am thinking to develop a proper user interface to try it out more conveniently as soon as possible.
+
+This project performs **sentiment analysis on tweets** using a custom deep learning model with pre-trained word embeddings. It includes complete steps from raw data processing and visualization to training, evaluation, and saving the final model.
+
+---
+
+## Dataset
+
+- **Source**: [Kaggle - Twitter Sentiment 140](https://www.kaggle.com/datasets/kazanova/sentiment140)
+- **Labels**: `0` for Negative, `4` for Positive (converted to `Negative`/`Positive`)
+
+---
+
+## Data Analysis & Visualization
+
+Using `pandas` and `seaborn`:
+
+- Distribution of sentiment classes
+- Tweet length distribution
+- Separate visualization for positive and negative tweet lengths
+
+Example:
+```python
+sns.countplot(x='label', data=df)
+sns.boxplot(y='length', data=df)
+````
+
+---
+
+## Preprocessing
+
+Steps included:
+
+* Noise removal using regex (URLs, mentions, non-alphanumeric)
+* Stopword removal
+* Stemming using `SnowballStemmer`
+* Tokenization with Keras
+* Padding to uniform input length
+
+```python
+text = re.sub(r"https?://[^\s]+|@(\w+)|[^A-Za-z0-9]+", " ", text.lower())
+```
+
+---
+
+## Word Embedding
+
+* Trained a **custom Word2Vec** model (`Gensim`)
+* Embedding vectors of dimension `100`
+* Initialized embedding matrix for Keras with pre-trained vectors
+
+---
+
+## Model Architecture
+
+* **Embedding Layer** (non-trainable, custom pretrained)
+* **SpatialDropout1D**
+* **1D Convolution Layer**
+* **Bidirectional LSTM**
+* **Dense Layers with Dropout**
+* **Sigmoid Output for Binary Classification**
+
+```python
+input → Embedding → Dropout → Conv1D → BiLSTM → Dense → Dropout → Output
+```
+
+Loss Function: `binary_crossentropy`
+Optimizer: `Adam` with `ReduceLROnPlateau`
+Training Epochs: `10`
+Batch Size: `512`
+
+---
+
+## Evaluation
+
+The model was evaluated on a held-out test set of **160,000 tweets**.
+
+| Metric                  | Value |
+| ----------------------- | ----- |
+| **Accuracy**            | 75%   |
+| **F1 Score (Negative)** | 0.73  |
+| **F1 Score (Positive)** | 0.76  |
+| **Macro Avg F1**        | 0.75  |
+
+The model performs slightly better on **positive sentiments** (recall: 82%) but is reasonably balanced overall.
+
+---
+
+## Model Persistence
+
+* Trained model saved as `lstm_model.keras`
+* Word embeddings saved as `word_embedding.model` (Gensim)
