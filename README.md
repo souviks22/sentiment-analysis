@@ -77,16 +77,16 @@ The model was evaluated on a held-out test set of **160,000 tweets**.
 
 | Metric                  | Value |
 | ----------------------- | ----- |
-| **Accuracy**            | 75%   |
-| **F1 Score (Negative)** | 0.73  |
-| **F1 Score (Positive)** | 0.76  |
-| **Macro Avg F1**        | 0.75  |
+| **Accuracy**            | 79%   |
+| **F1 Score (Negative)** | 0.79  |
+| **F1 Score (Positive)** | 0.79  |
+| **Macro Avg F1**        | 0.79  |
 
-The model performs slightly better on **positive sentiments** (recall: 82%) but is reasonably balanced overall.
+The model performs slightly better on precision (80%) for **positive sentiments** and recall (80%) for **negative sentiments** but is reasonably balanced overall.
 
 ---
 
 ## Model Persistence
 
-* Trained model saved as `lstm_model.keras`
-* Word embeddings saved as `word_embedding.model` (Gensim)
+* Trained model saved as [sentiment.keras](https://drive.google.com/file/d/1OHsgdtEkXHC5gVYta8UlMZx5bnzkWbnO/view?usp=drive_link)
+* Preprocessing tokenizer saved as [sentiment_tokenizer.json](https://drive.google.com/file/d/1-2RLxOq84cIcUG8-xZAdISHh7hGnubL1/view?usp=drive_link)
