@@ -9,3 +9,6 @@
 
 # Cache
 /scripts/__pycache__
+
+# Noise
+.DS_Store
